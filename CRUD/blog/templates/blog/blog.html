@@ -1,0 +1,24 @@
+{% extends 'app/base.html'%}
+
+{% load static %}
+{% block content %}   
+    
+<h1>Blog</h1> <br><br>
+    {% for post in posts %}  
+       <strong>{{post.titulo}}</strong>   <br>
+       {% if post.imagen %}
+        <img src="{{post.imagen.url}}" alt="" width="500"> <br>
+       {% endif %} 
+        {{post.contenido}} <br>
+        {{post.autor}} <br>
+        {% for categoria in post.categorias.all %}
+            {{categoria.nombre}}
+        {% endfor %} <br>
+        {{post.created}} <br><br>
+    {% endfor %}
+    <a href="{% url 'blog'  %}">Todas las categorías</a> &nbsp;
+    {% for categoria in categorias %}
+     <a href="{% url 'categoria' categoria.id %}">{{categoria.nombre}}</a> &nbsp;
+    {% endfor %}<br><br><br><br><br><br>
+{% endblock %}
+
